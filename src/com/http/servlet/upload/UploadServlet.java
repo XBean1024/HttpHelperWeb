@@ -1,5 +1,7 @@
 package com.http.servlet.upload;
 
+import com.alibaba.fastjson.JSON;
+import com.http.dao.user.bean.UserLoginInfo;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.ProgressListener;
@@ -10,23 +12,33 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.UUID;
 
+import static com.http.constant.Code.FILE_UPLOAD_ERROR;
+import static com.http.constant.Constant.CHART_SET_UTF_8;
+import static com.http.constant.Constant.PLATFORM_MOBILE_PHONE;
+
 /**
  * Created by Bean on 2017/8/5.
+ * function： 接受并处理上传文件的类
  */
 public class UploadServlet extends HttpServlet {
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        log("文件上传");
+    }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
         //上传时生成的临时文件保存目录
         String tempPath = this.getServletContext().getRealPath("/WEB-INF/temp");
+        String platform = request.getHeader("platform");
+        log(platform);
         File tmpFile = new File(tempPath);
         if (!tmpFile.exists()) {
             //创建临时目录
@@ -34,7 +46,7 @@ public class UploadServlet extends HttpServlet {
         }
 
         //消息提示
-        String message = "";
+        String message = "ssss";
         try {
             //使用Apache文件上传组件处理文件上传步骤：
             //1、创建一个DiskFileItemFactory工厂
@@ -49,12 +61,6 @@ public class UploadServlet extends HttpServlet {
             upload.setProgressListener(new ProgressListener() {
                 public void update(long pBytesRead, long pContentLength, int arg2) {
                     System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
-                    /**
-                     * 文件大小为：14608,当前已处理：4096
-                     文件大小为：14608,当前已处理：7367
-                     文件大小为：14608,当前已处理：11419
-                     文件大小为：14608,当前已处理：14608
-                     */
                 }
             });
             //解决上传文件名的中文乱码
@@ -62,13 +68,15 @@ public class UploadServlet extends HttpServlet {
             //3、判断提交上来的数据是否是上传表单的数据
             if (!ServletFileUpload.isMultipartContent(request)) {
                 //按照传统方式获取数据
-                return;
+                log("按照传统方式获取数据");
+
+//                return;
             }
 
             //设置上传单个文件的大小的最大值，目前是设置为1024*1024字节，也就是1MB
-            upload.setFileSizeMax(1024 * 1024);
+            upload.setFileSizeMax(1024 * 1024*100);
             //设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为10MB
-            upload.setSizeMax(1024 * 1024 * 50);
+            upload.setSizeMax(1024 * 1024 * 100);
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(request);
             for (FileItem item : list) {
@@ -119,20 +127,36 @@ public class UploadServlet extends HttpServlet {
             }
         } catch (FileUploadBase.FileSizeLimitExceededException e) {
             e.printStackTrace();
-            request.setAttribute("message", "单个文件超出最大值！！！");
-            request.getRequestDispatcher("/jsp/upload/message.jsp").forward(request, response);
+            message = "单个文件超出最大值！"+ e.getMessage();
+            responseToClient(request, response, platform, message);
             return;
         } catch (FileUploadBase.SizeLimitExceededException e) {
             e.printStackTrace();
-            request.setAttribute("message", "上传文件的总的大小超出限制的最大值！！！");
-            request.getRequestDispatcher("/jsp/upload/message.jsp").forward(request, response);
+            message = "上传文件的总的大小超出限制的最大值！"+ e.getMessage();
+            log(message);
+            responseToClient(request, response, platform, message);
             return;
         } catch (Exception e) {
-            message = "文件上传失败！";
+            message = "文件上传失败！"+ e.getMessage();
+            log(message);
+            responseToClient(request, response, platform, message);
             e.printStackTrace();
         }
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("/jsp/upload/message.jsp").forward(request, response);
+        responseToClient(request, response, platform, message);
+    }
+
+    private void responseToClient(HttpServletRequest request, HttpServletResponse response, String platform, String message) throws IOException, ServletException {
+        if (platform.equals(PLATFORM_MOBILE_PHONE)) {
+            OutputStream outputStream = response.getOutputStream();
+            UserLoginInfo userLoginInfo = new UserLoginInfo();
+            userLoginInfo.setUserLoginInfo(FILE_UPLOAD_ERROR,message);
+            outputStream.write(JSON.toJSONString(userLoginInfo).getBytes(CHART_SET_UTF_8));//输出响应数据
+            outputStream.flush();
+            outputStream.close();
+        }else {
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("/jsp/upload/message.jsp").forward(request, response);
+        }
     }
 
     /**

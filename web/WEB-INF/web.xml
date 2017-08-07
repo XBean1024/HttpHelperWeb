@@ -5,7 +5,7 @@
          version="3.1">
 
     <welcome-file-list>
-        <welcome-file>jsp/upload/upload.jsp</welcome-file>
+        <!--<welcome-file>jsp/upload/upload.jsp</welcome-file>-->
         <welcome-file>login/login-form/login.html</welcome-file>
         <welcome-file>login/random-login-form/login.html</welcome-file>
     </welcome-file-list>

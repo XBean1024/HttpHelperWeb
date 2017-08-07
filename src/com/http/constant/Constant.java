@@ -15,4 +15,10 @@ public class Constant {
     public static final String TAG_DELETE = "1";
     public static final String TAG_UPDATE = "2";
 
+
+    public static final String PLATFORM_MOBILE_PHONE = "mobile_phone";
+    public static final String PLATFORM_PC = "pc";
+
+
+
 }

@@ -27,6 +27,9 @@ public class Code {
     public static final String CODE_REGISTER_SUCCESS = "1007";//注册成功
     public static final String INFO_REGISTER_ERROR = "注册失败";//注册失败
     public static final String INFO_REGISTER_SUCCESS = "注册成功";//注册成功
+    public static final String CODE_PLATFORM_ERROR = "1008";//平台信息出错
+    public static final String INFO_PLATFORM_ERROR = "平台信息出错";
+    public static final String FILE_UPLOAD_ERROR = "1009";//文件上传
     /*
     * 描述信息
     * */
