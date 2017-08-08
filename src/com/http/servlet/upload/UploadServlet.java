@@ -80,7 +80,7 @@ public class UploadServlet extends HttpServlet {
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(request);
             for (FileItem item : list) {
-                logInfo("leagueOfLegender");
+                logInfo("遍历文件数据");
                 //如果fileitem中封装的是普通输入项的数据
                 if (item.isFormField()) {
                     String name = item.getFieldName();
