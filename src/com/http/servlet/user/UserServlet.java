@@ -87,6 +87,9 @@ public class UserServlet extends HttpServlet implements IUser {
         String platform = request.getParameter("platform");
 
 
+        log(account);
+        log(password);
+        log(platform);
               /*参数取值检查*/
         if (Util.isEmpty(password)) {
             OutputStream outputStream = response.getOutputStream();

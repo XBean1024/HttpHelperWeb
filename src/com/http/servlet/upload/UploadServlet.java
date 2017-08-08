@@ -19,6 +19,8 @@ import java.util.UUID;
 import static com.http.constant.Code.FILE_UPLOAD_ERROR;
 import static com.http.constant.Constant.CHART_SET_UTF_8;
 import static com.http.constant.Constant.PLATFORM_MOBILE_PHONE;
+import static com.http.constant.Constant.PLATFORM_PC;
+import static com.http.util.Util.logInfo;
 
 /**
  * Created by Bean on 2017/8/5.
@@ -37,7 +39,8 @@ public class UploadServlet extends HttpServlet {
         String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
         //上传时生成的临时文件保存目录
         String tempPath = this.getServletContext().getRealPath("/WEB-INF/temp");
-        String platform = request.getHeader("platform");
+        String platformTemp = request.getHeader("platform");
+        String platform =platformTemp==null?PLATFORM_PC:platformTemp;
         log(platform);
         File tmpFile = new File(tempPath);
         if (!tmpFile.exists()) {
@@ -46,7 +49,7 @@ public class UploadServlet extends HttpServlet {
         }
 
         //消息提示
-        String message = "ssss";
+        String message = null;
         try {
             //使用Apache文件上传组件处理文件上传步骤：
             //1、创建一个DiskFileItemFactory工厂
@@ -67,12 +70,9 @@ public class UploadServlet extends HttpServlet {
             upload.setHeaderEncoding("UTF-8");
             //3、判断提交上来的数据是否是上传表单的数据
             if (!ServletFileUpload.isMultipartContent(request)) {
-                //按照传统方式获取数据
-                log("按照传统方式获取数据");
-
-//                return;
+                logInfo("按照传统方式获取数据");
+                return;
             }
-
             //设置上传单个文件的大小的最大值，目前是设置为1024*1024字节，也就是1MB
             upload.setFileSizeMax(1024 * 1024*100);
             //设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为10MB
@@ -80,6 +80,7 @@ public class UploadServlet extends HttpServlet {
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(request);
             for (FileItem item : list) {
+                logInfo("leagueOfLegender");
                 //如果fileitem中封装的是普通输入项的数据
                 if (item.isFormField()) {
                     String name = item.getFieldName();
@@ -109,7 +110,8 @@ public class UploadServlet extends HttpServlet {
                     String realSavePath = makePath(saveFilename, savePath);
                     //创建一个文件输出流
                     FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
-                    message = "上传的文件的路径是：" + realSavePath + " 文件名：" + saveFilename + "." + fileExtName;
+                    String path = "上传的文件的路径是：" + realSavePath + " 文件名：" + saveFilename ;
+                    logInfo(path);
                     //创建一个缓冲区
                     byte buffer[] = new byte[1024];
                     //判断输入流中的数据是否已经读完的标识
@@ -122,26 +124,31 @@ public class UploadServlet extends HttpServlet {
                     //关闭输入流
                     in.close();
                     //关闭输出流
-                    out.close();        //删除处理文件上传时生成的临时文件        //item.delete();        message = "文件上传成功！";
+                    out.close();
+                    //删除处理文件上传时生成的临时文件
+                    item.delete();
+                    message = "文件上传成功！";
                 }
             }
         } catch (FileUploadBase.FileSizeLimitExceededException e) {
             e.printStackTrace();
             message = "单个文件超出最大值！"+ e.getMessage();
+            logInfo(message);
             responseToClient(request, response, platform, message);
             return;
         } catch (FileUploadBase.SizeLimitExceededException e) {
             e.printStackTrace();
             message = "上传文件的总的大小超出限制的最大值！"+ e.getMessage();
-            log(message);
+            logInfo(message);
             responseToClient(request, response, platform, message);
             return;
         } catch (Exception e) {
             message = "文件上传失败！"+ e.getMessage();
-            log(message);
+            logInfo(message);
             responseToClient(request, response, platform, message);
             e.printStackTrace();
         }
+        logInfo(message);
         responseToClient(request, response, platform, message);
     }
 
