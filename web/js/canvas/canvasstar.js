@@ -25,7 +25,7 @@
         dot_alpha : 0.5,
         dot_aReduction : 0.01,
         dotsMinDist : 5,
-        maxDistFromCursor : 50,
+        maxDistFromCursor : 50
     };
     var stars = [],
         dots = [],

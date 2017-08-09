@@ -53,10 +53,7 @@ public class UserServlet extends HttpServlet implements IUser {
                 login(request, response);
                 break;
             case TAG_REGISTER:
-                //新增
-//                int age = Integer.parseInt(request.getParameter("age"));//年龄
-//                UserBean userBean = new UserBean(account,password,age);
-
+                register(request, response);
                 break;
             case TAG_DELETE:
                 //删除
@@ -125,7 +122,7 @@ public class UserServlet extends HttpServlet implements IUser {
                     break;
                 default: {
                     userLoginInfo = new UserLoginInfo();
-                    userLoginInfo.setUserLoginInfo(Code.CODE_PLATFORM_ERROR,Code.INFO_PLATFORM_ERROR);
+                    userLoginInfo.setUserLoginInfo(Code.CODE_PLATFORM_ERROR, Code.INFO_PLATFORM_ERROR);
                     OutputStream outputStream = response.getOutputStream();
                     jsonBytes = JSON.toJSONString(userLoginInfo).getBytes(CHART_SET_UTF_8);
                     outputStream.write(jsonBytes);//输出响应数据
@@ -138,8 +135,16 @@ public class UserServlet extends HttpServlet implements IUser {
     }
 
     @Override
-    public void register(OutputStream outputStream, UserBean userBean, UserInfoDao userInfoDao, byte[] jsonBytes) throws IOException {
+    public void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        String account = request.getParameter("account");//账号
+        String password = request.getParameter("password");//密码
+        int age = Integer.parseInt(request.getParameter("age"));//年龄
+
+        UserBean userBean = new UserBean(account,password,age);
         logInfo(userBean.getName());
+
+        UserInfoDao userInfoDao = new UserInfoDao();
         int count = userInfoDao.insert(userBean);
         UserLoginInfo userLoginInfo = new UserLoginInfo();
         if (count != 0) {//注册成功
@@ -147,7 +152,8 @@ public class UserServlet extends HttpServlet implements IUser {
         } else {
             userLoginInfo.setUserLoginInfo(Code.CODE_REGISTER_ERROR, Code.INFO_REGISTER_ERROR);
         }
-        jsonBytes = JSON.toJSONString(userLoginInfo).getBytes(CHART_SET_UTF_8);
+        byte[] jsonBytes = JSON.toJSONString(userLoginInfo).getBytes(CHART_SET_UTF_8);
+        OutputStream outputStream = response.getOutputStream();
         outputStream.write(jsonBytes);//输出响应数据
         outputStream.flush();
         outputStream.close();
