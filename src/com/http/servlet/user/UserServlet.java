@@ -83,10 +83,7 @@ public class UserServlet extends HttpServlet implements IUser {
         String password = request.getParameter("password");//密码
         String platform = request.getParameter("platform");
 
-
-        log(account);
-        log(password);
-        log(platform);
+        account = new String(account.getBytes("ISO8859-1"),CHART_SET_UTF_8);//解决中文乱码
               /*参数取值检查*/
         if (Util.isEmpty(password)) {
             OutputStream outputStream = response.getOutputStream();
@@ -139,10 +136,10 @@ public class UserServlet extends HttpServlet implements IUser {
 
         String account = request.getParameter("account");//账号
         String password = request.getParameter("password");//密码
+        String telephone = request.getParameter("telephone");//密码
         int age = Integer.parseInt(request.getParameter("age"));//年龄
 
-        UserBean userBean = new UserBean(account,password,age);
-        logInfo(userBean.getName());
+        UserBean userBean = new UserBean(new String(account.getBytes("ISO8859-1"),CHART_SET_UTF_8),password,age,telephone);
 
         UserInfoDao userInfoDao = new UserInfoDao();
         int count = userInfoDao.insert(userBean);

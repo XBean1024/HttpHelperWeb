@@ -17,8 +17,7 @@ import static com.http.util.Util.logInfo;
 public class UserInfoDao implements IUserInfo {
     @Override
     public int insert(UserBean userBean) {
-        String sql = " insert into users(name,password,age) values(?,?,?)";
-
+        String sql = " insert into users(name,password,age,telephone) values(?,?,?,?)";
         return add(sql, userBean);
     }
 
