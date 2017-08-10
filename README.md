@@ -3,6 +3,9 @@
 ![](https://github.com/Xbean1024/HttpHelperWeb/blob/master/gif/login_register.gif)
 ![](https://github.com/Xbean1024/HttpHelperWeb/blob/master/gif/data.png)
 ### 日志：
+2017/8/10 17:21:20 
+###  上传数据库  数据结构
+![](https://github.com/Xbean1024/HttpHelperWeb/blob/master/gif/db.png)
 2017/8/8 13:27:53 
 ### 1、post 请求，支持多文件上传 
 
