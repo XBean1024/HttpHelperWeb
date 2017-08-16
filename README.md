@@ -26,7 +26,5 @@
 
 ## QQ：交流群 ：192268854
 ![](https://github.com/Xbean1024/XHttp/blob/master/gif/QQ.JPG)
-<form name="atool_alipay_img_form" style="padding-bottom: 0;border:none;" method="post" action="https://shenghuo.alipay.com/send/payment/fill.htm" target="_blank" accept-charset="GBK" onsubmit="document.charset='gbk';"><input type="hidden" value="18221869775" name="optEmail"> <input type="hidden" name="title" placeholder="付款说明" value=""> <input type="image" value="支付宝收款" src="http://www.atool.org/res/alipay_1.png" name="pay"></form>
 
-<form name="atool_alipay_text_form" style="padding-bottom: 0;border:none;" method="post" action="https://shenghuo.alipay.com/send/payment/fill.htm" target="_blank" accept-charset="GBK" onsubmit="document.charset='gbk';"><input type="hidden" value="18221869775" name="optEmail"> <input type="hidden" value="1000" name="payAmount"> <input type="hidden" name="title" placeholder="付款说明" value=""> [向我捐款](javascript:javascript:document.atool_alipay_text_form.submit(); "支付宝收款")</form>
 
