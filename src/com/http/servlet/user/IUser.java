@@ -27,6 +27,8 @@ public interface IUser {
 
     /**
      * 更新用户信息
+     * @param request
+     * @param response
      */
-    void update();
+    void update(HttpServletRequest request, HttpServletResponse response);
 }

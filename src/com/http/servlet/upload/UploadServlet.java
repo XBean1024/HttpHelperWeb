@@ -162,7 +162,7 @@ public class UploadServlet extends HttpServlet {
             outputStream.close();
         }else {
             request.setAttribute("message", message);
-            request.getRequestDispatcher("/jsp/upload/message.jsp").forward(request, response);
+            request.getRequestDispatcher("/upload/message.jsp").forward(request, response);
         }
     }
 

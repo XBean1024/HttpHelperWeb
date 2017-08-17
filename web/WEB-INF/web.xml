@@ -6,8 +6,7 @@
 
     <welcome-file-list>
         <!--<welcome-file>jsp/upload/upload.jsp</welcome-file>-->
-        <welcome-file>login/login-form/login.html</welcome-file>
-        <welcome-file>login/random-login-form/login.html</welcome-file>
+        <welcome-file>login/login.jsp</welcome-file>
     </welcome-file-list>
     <!--在web.xml中完成的一个最常见的任务是对servlet或JSP页面给出名称和定制的URL。
     用servlet元素分配名称；
@@ -17,7 +16,7 @@
     <!--用户登录-->
     <servlet>
         <servlet-name>UserLogin</servlet-name>
-        <servlet-class>com.http.servlet.user.UserServlet</servlet-class>
+        <servlet-class>com.http.servlet.user.LoginServlet</servlet-class>
 
         <!--初始化参数-->
         <init-param>
@@ -36,7 +35,15 @@
         <servlet-name>UploadServlet</servlet-name>
         <servlet-class>com.http.servlet.upload.UploadServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.http.servlet.user.RegisterServlet</servlet-class>
+    </servlet>
 
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>

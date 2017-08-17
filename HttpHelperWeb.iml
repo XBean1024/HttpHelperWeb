@@ -36,5 +36,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" scope="PROVIDED" name="Tomcat 6.0.53" level="application_server_libraries" />
+    <orderEntry type="library" name="prefixfree" level="application" />
   </component>
 </module>

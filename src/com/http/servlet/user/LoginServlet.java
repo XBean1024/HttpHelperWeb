@@ -8,7 +8,6 @@ import com.http.dao.user.bean.UserLoginInfo;
 import com.http.util.Util;
 
 import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import static com.http.constant.Code.CODE_LOGIN_SUCCESS;
 import static com.http.constant.Constant.*;
 import static com.http.util.Util.logInfo;
 
@@ -23,19 +23,8 @@ import static com.http.util.Util.logInfo;
  * Created by smart on 2017/8/4.
  * function： 处理用户信息的 类
  */
-public class UserServlet extends HttpServlet implements IUser {
+public class LoginServlet extends HttpServlet implements IUser {
     private static final long serialVersionUID = 1L;
-
-
-    public void init() throws ServletException {
-        log("init！！！！！！！！！！！！！！！");
-    }
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        log("init 2 ！！！！！！！！！！！！！！！");
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -59,7 +48,8 @@ public class UserServlet extends HttpServlet implements IUser {
                 //删除
                 break;
             case TAG_UPDATE:
-                //更新
+                //修改用户信息
+                update(request, response);
                 break;
         }
 
@@ -79,29 +69,30 @@ public class UserServlet extends HttpServlet implements IUser {
     @Override
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        String account = request.getParameter("account");//账号
+        String account = request.getParameter("name");//账号
         String password = request.getParameter("password");//密码
-        String platform = request.getParameter("platform");
+        String platform = request.getParameter("platform");//平台  PC或者手机
 
-        account = new String(account.getBytes("ISO8859-1"),CHART_SET_UTF_8);//解决中文乱码
+        account = new String(account.getBytes("ISO8859-1"), CHART_SET_UTF_8);//解决中文乱码
+        logInfo("账号 ：" + account);
               /*参数取值检查*/
-        if (Util.isEmpty(password)) {
-            OutputStream outputStream = response.getOutputStream();
-            emptyParams(outputStream, Code.CODE_PASSWORD_ERROR, Code.INFO_PASSWORD_ERROR);
-            return;
-        }
         if (Util.isEmpty(account)) {
             OutputStream outputStream = response.getOutputStream();
             emptyParams(outputStream, Code.CODE_ACCOUNT_ERROR, Code.INFO_ACCOUNT_ERROR);
             return;
         }
-
-
+        if (Util.isEmpty(password)) {
+            OutputStream outputStream = response.getOutputStream();
+            emptyParams(outputStream, Code.CODE_PASSWORD_ERROR, Code.INFO_PASSWORD_ERROR);
+            return;
+        }
         if (!Util.isEmpty(platform)) {
             UserInfoDao userInfoDao = new UserInfoDao();//业务类
             UserLoginInfo userLoginInfo;
-            byte[] jsonBytes = null;
+            byte[] jsonBytes;
+            logInfo("客户端类型 ：" + platform);
             switch (platform) {
+
                 case PLATFORM_MOBILE_PHONE: {
                     userLoginInfo = userInfoDao.select(account, password);
                     log(userLoginInfo.getMsg());
@@ -113,9 +104,21 @@ public class UserServlet extends HttpServlet implements IUser {
                     break;
                 }
                 case PLATFORM_PC:
+                    userLoginInfo = userInfoDao.select(account, password);
                     //转发
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/upload/upload.jsp");
-                    dispatcher.forward(request, response);
+                    logInfo("检查结果：" + userLoginInfo.getCode());
+                    if (userLoginInfo.getCode().equals(CODE_LOGIN_SUCCESS)) {
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("/upload/upload.jsp");
+                        dispatcher.forward(request, response);
+                    } else {
+                        log(userLoginInfo.getMsg());
+                        jsonBytes = JSON.toJSONString(userLoginInfo).getBytes(CHART_SET_UTF_8);
+                        OutputStream outputStream = response.getOutputStream();
+                        outputStream.write(jsonBytes);//输出响应数据
+                        outputStream.flush();
+                        outputStream.close();
+                    }
+
                     break;
                 default: {
                     userLoginInfo = new UserLoginInfo();
@@ -134,12 +137,12 @@ public class UserServlet extends HttpServlet implements IUser {
     @Override
     public void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        String account = request.getParameter("account");//账号
+        String name = request.getParameter("name");//账号
         String password = request.getParameter("password");//密码
         String telephone = request.getParameter("telephone");//密码
         int age = Integer.parseInt(request.getParameter("age"));//年龄
 
-        UserBean userBean = new UserBean(new String(account.getBytes("ISO8859-1"),CHART_SET_UTF_8),password,age,telephone);
+        UserBean userBean = new UserBean(new String(name.getBytes("ISO8859-1"), CHART_SET_UTF_8), password, age, telephone);
 
         UserInfoDao userInfoDao = new UserInfoDao();
         int count = userInfoDao.insert(userBean);
@@ -157,7 +160,10 @@ public class UserServlet extends HttpServlet implements IUser {
     }
 
     @Override
-    public void update() {
-
+    public void update(HttpServletRequest request, HttpServletResponse response) {
+        String account = request.getParameter("account");//账号
+        String password = request.getParameter("password");//密码
+        String telephone = request.getParameter("telephone");//密码
+        int age = Integer.parseInt(request.getParameter("age"));//年龄
     }
 }
