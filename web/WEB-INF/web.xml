@@ -15,7 +15,7 @@
 
     <!--用户登录-->
     <servlet>
-        <servlet-name>UserLogin</servlet-name>
+        <servlet-name>UserServlet</servlet-name>
         <servlet-class>com.http.servlet.user.LoginServlet</servlet-class>
 
         <!--初始化参数-->
@@ -39,18 +39,26 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.http.servlet.user.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ModifyServlet</servlet-name>
+        <servlet-class>com.http.servlet.user.ModifyServlet</servlet-class>
+    </servlet>
 
+
+    <servlet-mapping>
+        <servlet-name>ModifyServlet</servlet-name>
+        <url-pattern>/modify</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>UploadServlet</servlet-name>
         <url-pattern>/upload</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>UserLogin</servlet-name>
+        <servlet-name>UserServlet</servlet-name>
         <url-pattern>/user</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

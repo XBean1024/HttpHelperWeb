@@ -1,14 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="static com.http.util.Util.logInfo" %>
-<%@ page import="static com.http.util.Util.logInfo" %>
 <%@ page import="static com.http.constant.Code.CODE_LOGIN_SUCCESS" %>
 <%@ page import="com.http.dao.user.UserInfoDao" %>
-<%@ page import="com.http.dao.user.bean.UserLoginInfo" %>
+<%@ page import="com.http.servlet.user.bean.UserInfo" %>
 <%@ page import="com.http.util.Util" %>
 
 <%
     UserInfoDao userInfoDao = new UserInfoDao();
-    UserLoginInfo userLoginInfo;
+    UserInfo userLoginInfo;
     String name = request.getParameter("name");
     String password = request.getParameter("password");
 //    if (Util.isEmpty(name)) {
@@ -19,7 +18,7 @@
 //        out.print("<script>alert(Code.INFO_PASSWORD_ERROR); </script>");
 //        return;
 //    }
-    userLoginInfo = userInfoDao.select(name, password);
+    userLoginInfo = userInfoDao.select(name, password, );
     //转发
     logInfo("检查结果：" + userLoginInfo.getCode());
     if (userLoginInfo.getCode().equals(CODE_LOGIN_SUCCESS)) {

@@ -30,9 +30,24 @@ public class Code {
     public static final String CODE_PLATFORM_ERROR = "1008";//平台信息出错
     public static final String INFO_PLATFORM_ERROR = "平台信息出错";
     public static final String FILE_UPLOAD_ERROR = "1009";//文件上传
-    /*
-    * 描述信息
-    * */
+
+    public static final String CODE_PHONE_ERROR = "1010";//手机号不存在
+    public static final String INFO_PHONE_ERROR = "手机号不正确！";
+    public static final String INFO_PHONE_NULL = "手机号你未绑定手机号！";
+
+    public static final String CODE_UPDATE_PASSWORD_ERROR = "1011";//修改密码
+    public static final String INFO_UPDATE_PASSWORD_ERROR = "修改失败！";
+
+    public static final String CODE_UPDATE_PASSWORD_SUCCESS = "1012";//修改密码
+    public static final String INFO_UPDATE_PASSWORD_SUCCESS = "修改成功！";
+
+
+
+    public static final String COLUMN_LABEL_PASSWORD = "password";//文件上传
+    public static final String COLUMN_LABEL_PHONE = "phone";//文件上传
+    public static final String COLUMN_LABEL_AGE = "age";//文件上传
+    public static final String COLUMN_LABEL_NAME = "name";//文件上传
+
 
 
 

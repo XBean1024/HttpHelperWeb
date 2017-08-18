@@ -1,4 +1,4 @@
-package com.http.dao.user.bean;
+package com.http.servlet.user.bean;
 
 /**
  * Created by smart on 2017/8/3.
@@ -13,6 +13,12 @@ public class UserBean {
         this.name = name;
         this.password = password;
         this.age = age;
+        this.telephone = telephone;
+    }
+
+    public UserBean(String s, String password, String telephone) {
+        this.name = name;
+        this.password = password;
         this.telephone = telephone;
     }
 

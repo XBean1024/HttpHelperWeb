@@ -1,13 +1,13 @@
 package com.http.dao.user;
 
-import com.http.dao.user.bean.UserBean;
-import com.http.dao.user.bean.UserLoginInfo;
+import com.http.servlet.user.bean.UserBean;
+import com.http.servlet.user.bean.UserInfo;
 import com.http.constant.Code;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static com.http.dao.user.util.UtilUserInfo.*;
+import static com.http.dao.util.UtilUserInfo.*;
 import static com.http.util.Util.logInfo;
 
 /**
@@ -16,8 +16,7 @@ import static com.http.util.Util.logInfo;
  */
 public class UserInfoDao implements IUserInfo {
     @Override
-    public int insert(UserBean userBean) {
-        String sql = " insert into users(name,password,age,telephone) values(?,?,?,?)";
+    public int insert(UserBean userBean, String sql) {
         return add(sql, userBean);
     }
 
@@ -29,16 +28,14 @@ public class UserInfoDao implements IUserInfo {
     @Override
     public int update(UserBean userBean) {
         String sql = " update users " + " set name = ? , " + " password = ? , "
-                + " age= ? " + " where name= " + userBean.getName();
-        logInfo(sql);
-        return modify(sql, userBean);
-
+                             + " age= ? " + " where name= " + userBean.getName();
+        return add(sql, userBean);
     }
 
     @Override
-    public UserLoginInfo select(String name, String password) {
+    public UserInfo select(String name, String password, String columnLabel) {
         ResultSet resultSet = query(name);
-        UserLoginInfo userLoginInfo = new UserLoginInfo();
+        UserInfo userLoginInfo = new UserInfo();
         try {
             if (resultSet.next()) {
                 logInfo("数据校验！" + resultSet.getString("password"));

@@ -1,7 +1,7 @@
 package com.http.servlet.upload;
 
 import com.alibaba.fastjson.JSON;
-import com.http.dao.user.bean.UserLoginInfo;
+import com.http.servlet.user.bean.UserInfo;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.ProgressListener;
@@ -155,7 +155,7 @@ public class UploadServlet extends HttpServlet {
     private void responseToClient(HttpServletRequest request, HttpServletResponse response, String platform, String message) throws IOException, ServletException {
         if (platform.equals(PLATFORM_MOBILE_PHONE)) {
             OutputStream outputStream = response.getOutputStream();
-            UserLoginInfo userLoginInfo = new UserLoginInfo();
+            UserInfo userLoginInfo = new UserInfo();
             userLoginInfo.setUserLoginInfo(FILE_UPLOAD_ERROR,message);
             outputStream.write(JSON.toJSONString(userLoginInfo).getBytes(CHART_SET_UTF_8));//输出响应数据
             outputStream.flush();

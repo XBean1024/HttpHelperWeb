@@ -1,6 +1,6 @@
-package com.http.dao.user.util;
+package com.http.dao.util;
 
-import com.http.dao.user.bean.UserBean;
+import com.http.servlet.user.bean.UserBean;
 import com.http.dao.connect.DBConnection;
 
 import java.sql.Connection;
@@ -52,7 +52,7 @@ public class UtilUserInfo {
 
     public static ResultSet query(String name) {
 
-        String sql = "select name,password from users where name='" + name + "'";
+        String sql = "select * from users where name='" + name + "'";
         logInfo(sql);
         // 连接数据库 保持连接
         Connection con = DBConnection.getConnection();

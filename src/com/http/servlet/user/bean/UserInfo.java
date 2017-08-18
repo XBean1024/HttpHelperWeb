@@ -1,6 +1,6 @@
-package com.http.dao.user.bean;
+package com.http.servlet.user.bean;
 
-public class UserLoginInfo {
+public class UserInfo {
 
     private String mMsg;//用户登反馈信息描述
     private String mCode;//登录反馈信息码
