@@ -18,6 +18,7 @@ import java.sql.SQLException;
 
 import static com.http.constant.Constant.*;
 import static com.http.dao.util.UtilUserInfo.query;
+import static com.http.util.Util.logInfo;
 
 /**
  * Created by smart on 2017/8/18.
@@ -47,6 +48,7 @@ public class ModifyServlet extends HttpServlet {
 
     private UserInfo modify(UserBean userBean) {
         //查询手机号是否正确
+        logInfo(userBean.getName());
         ResultSet resultSet = query(userBean.getName());//得到结果集
         //遍历结果集
         UserInfo userInfo = new UserInfo();
