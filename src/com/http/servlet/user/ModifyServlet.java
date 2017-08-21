@@ -42,6 +42,7 @@ public class ModifyServlet extends HttpServlet {
         String telephone = request.getParameter("telephone");//手机号
         try {
             UserBean userBean = new UserBean(new String(name.getBytes(CHART_SET_ISO_8859_1), CHART_SET_UTF_8), password, telephone);
+
             UserInfo userInfo = modify(userBean);
             logInfo(userInfo.getMsg());
             byte[] jsonBytes = JSON.toJSONString(userInfo).getBytes(CHART_SET_UTF_8);
