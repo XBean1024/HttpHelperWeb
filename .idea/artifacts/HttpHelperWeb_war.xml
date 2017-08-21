@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="HttpHelperWeb:war">
-    <output-path>C:/Tomcat 6.0/webapps</output-path>
-    <root id="archive" name="HttpHelperWeb.war">
-      <element id="artifact" artifact-name="HttpHelperWeb:war exploded" />
-    </root>
-  </artifact>
-</component>

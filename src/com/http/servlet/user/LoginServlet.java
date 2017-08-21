@@ -79,9 +79,8 @@ public class LoginServlet extends HttpServlet {
                         outputStream.close();
                     }
                     break;
-
             }
         }
 
     }
-  }
+}

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,7 +37,9 @@ public class UploadServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
-        String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+//        String savePath = this.getServletContext().getRealPath("/WEB-INF/upload");
+        //http://localhost:8080/HttpHelperWeb/upload/0/6/ef50f254-7481-4357-8c59-5d83eba8a12b_back.png
+        String savePath = this.getServletContext().getRealPath("/upload");
         //上传时生成的临时文件保存目录
         String tempPath = this.getServletContext().getRealPath("/WEB-INF/temp");
         String platformTemp = request.getHeader("platform");
@@ -73,12 +76,14 @@ public class UploadServlet extends HttpServlet {
                 logInfo("按照传统方式获取数据");
                 return;
             }
-            //设置上传单个文件的大小的最大值，目前是设置为1024*1024字节，也就是1MB
-            upload.setFileSizeMax(1024 * 1024*100);
-            //设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为10MB
+            //设置上传单个文件的大小的最大值，10MB
+            upload.setFileSizeMax(1024 * 1024*10);
+            //设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为100MB
             upload.setSizeMax(1024 * 1024 * 100);
             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
             List<FileItem> list = upload.parseRequest(request);
+            //文件路径
+            List<String> filePath = new ArrayList<>();
             for (FileItem item : list) {
                 logInfo("遍历文件数据");
                 //如果fileitem中封装的是普通输入项的数据
@@ -98,10 +103,7 @@ public class UploadServlet extends HttpServlet {
                     //注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如： c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
                     //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
                     filename = filename.substring(filename.lastIndexOf("\\") + 1);
-                    //得到上传文件的扩展名
-                    String fileExtName = filename.substring(filename.lastIndexOf(".") + 1);
                     //如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
-                    System.out.println("上传的文件的扩展名是：" + fileExtName);
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //得到文件保存的名称
@@ -128,7 +130,11 @@ public class UploadServlet extends HttpServlet {
                     //删除处理文件上传时生成的临时文件
                     item.delete();
                     message = "文件上传成功！";
+//                    filePath.add()
                 }
+                //将文件的路径信息保存到数据库
+
+                saveFileInfo();
             }
         } catch (FileUploadBase.FileSizeLimitExceededException e) {
             e.printStackTrace();
@@ -150,6 +156,12 @@ public class UploadServlet extends HttpServlet {
         }
         logInfo(message);
         responseToClient(request, response, platform, message);
+    }
+    /*
+    * 保存文件信息到数据库
+    * */
+    private void saveFileInfo() {
+
     }
 
     private void responseToClient(HttpServletRequest request, HttpServletResponse response, String platform, String message) throws IOException, ServletException {

@@ -1,19 +1,20 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" build-on-make="true" name="HttpHelperWeb:war exploded">
+  <artifact type="exploded-war" name="HttpHelperWeb:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/HttpHelperWeb_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="HttpHelperWeb/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="HttpHelperWeb" />
+          <element id="library" level="application" name="prefixfree" />
         </element>
         <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/jsoup-1.10.3.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-io-2.0.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/fastjson-1.1.37.jar" />
           <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-fileupload-1.2.1.jar" />
-          <element id="file-copy" path="C:/Tomcat 6.0/lib/mysql-connector-java-5.1.43-bin.jar" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="HttpHelperWeb/web/Web" />
     </root>
   </artifact>
 </component>
