@@ -16,7 +16,7 @@ public class UserBean {
         this.telephone = telephone;
     }
 
-    public UserBean(String s, String password, String telephone) {
+    public UserBean(String name, String password, String telephone) {
         this.name = name;
         this.password = password;
         this.telephone = telephone;

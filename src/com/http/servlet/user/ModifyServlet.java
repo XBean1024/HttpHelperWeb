@@ -25,6 +25,12 @@ import static com.http.util.Util.logInfo;
  * function： 修改、更新用户信息
  */
 public class ModifyServlet extends HttpServlet {
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        logInfo("修改");
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
@@ -36,7 +42,9 @@ public class ModifyServlet extends HttpServlet {
         String telephone = request.getParameter("telephone");//手机号
         try {
             UserBean userBean = new UserBean(new String(name.getBytes(CHART_SET_ISO_8859_1), CHART_SET_UTF_8), password, telephone);
-            byte[] jsonBytes = JSON.toJSONString(modify(userBean)).getBytes(CHART_SET_UTF_8);
+            UserInfo userInfo = modify(userBean);
+            logInfo(userInfo.getMsg());
+            byte[] jsonBytes = JSON.toJSONString(userInfo).getBytes(CHART_SET_UTF_8);
             OutputStream outputStream = response.getOutputStream();
             outputStream.write(jsonBytes);//输出响应数据
             outputStream.flush();
@@ -54,9 +62,7 @@ public class ModifyServlet extends HttpServlet {
         UserInfo userInfo = new UserInfo();
         try {
             if (resultSet.next()) {
-                if (userBean.getTelephone() == null) {
-                    userInfo.setUserLoginInfo(Code.CODE_PHONE_ERROR, Code.INFO_PHONE_NULL);
-                } else if (!userBean.getTelephone().equals(resultSet.getString("telephone"))) {
+                if (!userBean.getTelephone().equals(resultSet.getString("telephone"))) {
                     userInfo.setUserLoginInfo(Code.CODE_PHONE_ERROR, Code.INFO_PHONE_ERROR);
                 } else {
                     //去更新
@@ -68,40 +74,12 @@ public class ModifyServlet extends HttpServlet {
                         userInfo.setUserLoginInfo(Code.CODE_UPDATE_PASSWORD_SUCCESS, Code.INFO_UPDATE_PASSWORD_SUCCESS);
                     }
                 }
+            }else {
+                userInfo.setUserLoginInfo(Code.CODE_ACCOUNT_NOT_EXIST, Code.INFO_ACCOUNT_NOT_EXIST);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return userInfo;
-
-//        String sql = " modify users " + " set name = ? , " + " password = ? , "
-//                             + " age= ? " + " where name= " + userBean.getName();
-//        logInfo(sql);
-//        // 连接数据库 保持连接
-//        Connection con = DBConnection.getConnection();
-//        // 增加用prepareStatement
-//        PreparedStatement pstmt = null;
-//        try {
-//            //组装sql 语句
-//            pstmt = con.prepareStatement(sql);
-//            pstmt.setString(1, userBean.getName());
-//            pstmt.setString(2, userBean.getPassword());
-//            pstmt.setInt(3, userBean.getAge());
-//            pstmt.setString(4, userBean.getTelephone());
-//            logInfo("手机号为 : "+userBean.getTelephone());
-//            return pstmt.executeUpdate();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        } finally {
-//            try {
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            }
-//            DBConnection.closeConnection();
-//        }
-//        return 0;
     }
 }

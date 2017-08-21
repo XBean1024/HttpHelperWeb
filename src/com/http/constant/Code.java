@@ -9,8 +9,9 @@ public class Code {
     * */
 
     public static final String CODE_SERVER_ERROR = "1000";//服务端出错
-    public static final String CODE_ACCOUNT_NOT_EXIST = "1001";//账号不存在
     public static final String INFO_SERVER_ERROR = "服务端出错！";
+
+    public static final String CODE_ACCOUNT_NOT_EXIST = "1001";//账号不存在
     public static final String INFO_ACCOUNT_NOT_EXIST = "账号不存在！";
 
     public static final String INFO_LOGIN_ERROR = "登录失败！";
