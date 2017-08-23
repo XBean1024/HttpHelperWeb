@@ -16,7 +16,7 @@ import static com.http.util.Util.logInfo;
  */
 public class UtilUserInfo {
 
-    public static int add(String sql, UserBean userBean) {
+    public static int update(String sql, UserBean userBean) {
 
         // 连接数据库 保持连接
         Connection con = DBConnection.getConnection();
@@ -45,9 +45,39 @@ public class UtilUserInfo {
         }
         return 0;
     }
+    public static int add(String sql, UserBean userBean) {
+
+        // 连接数据库 保持连接
+        Connection con = DBConnection.getConnection();
+        // 增加用prepareStatement
+        PreparedStatement pstmt = null;
+        logInfo(sql);
+        try {
+            //组装sql 语句
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, userBean.getName());
+            pstmt.setString(2, userBean.getPassword());
+            pstmt.setInt(3, userBean.getAge());
+            pstmt.setString(4, userBean.getTelephone());
+            logInfo("手机号为 : "+userBean.getTelephone());
+            return pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            DBConnection.closeConnection();
+        }
+        return 0;
+    }
 
     public static int modify(String sql, UserBean userBean) {
-        return add(sql, userBean);
+        return update(sql, userBean);
     }
 
     public static ResultSet query(String name) {

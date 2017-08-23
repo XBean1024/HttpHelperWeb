@@ -1,5 +1,6 @@
 package com.http.dao.user;
 
+import com.http.dao.util.UtilUserInfo;
 import com.http.servlet.user.bean.UserBean;
 import com.http.servlet.user.bean.UserInfo;
 import com.http.constant.Code;
@@ -17,7 +18,7 @@ import static com.http.util.Util.logInfo;
 public class UserInfoDao implements IUserInfo {
     @Override
     public int insert(UserBean userBean, String sql) {
-        return add(sql, userBean);
+        return UtilUserInfo.add(sql, userBean);
     }
 
     @Override
@@ -29,7 +30,7 @@ public class UserInfoDao implements IUserInfo {
     public int update(UserBean userBean) {
         String sql = " update users " + " set name = ? , " + " password = ? , "
                              + " age= ? " + " where name= " + userBean.getName();
-        return add(sql, userBean);
+        return UtilUserInfo.update(sql, userBean);
     }
 
     @Override
