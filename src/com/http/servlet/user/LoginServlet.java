@@ -20,7 +20,7 @@ import static com.http.constant.Constant.*;
 import static com.http.util.Util.emptyParams;
 import static com.http.util.Util.logInfo;
 
-/**
+/**C:\HttpHelperWeb\web\video\demo.mp4
  * Created by smart on 2017/8/4.
  * function： 处理用户信息的 类
  */
