@@ -66,7 +66,7 @@ public class UploadServlet extends HttpServlet {
             //监听文件上传进度
             upload.setProgressListener(new ProgressListener() {
                 public void update(long pBytesRead, long pContentLength, int arg2) {
-                    System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
+//                    System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
                 }
             });
             //解决上传文件名的中文乱码
@@ -84,6 +84,9 @@ public class UploadServlet extends HttpServlet {
             List<FileItem> list = upload.parseRequest(request);
             //文件路径
             List<String> filePath = new ArrayList<>();
+
+            logInfo("文件个数 "+list.size());
+            logInfo("文件个数 "+request.toString());
             for (FileItem item : list) {
                 logInfo("遍历文件数据");
                 //如果fileitem中封装的是普通输入项的数据
@@ -107,13 +110,14 @@ public class UploadServlet extends HttpServlet {
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //得到文件保存的名称
-                    String saveFilename = makeFileName(filename);
+                    String saveFilename = filename;
+//                    String saveFilename = makeFileName(filename);
                     //得到文件的保存目录
-                    String realSavePath = makePath(saveFilename, savePath);
+//                    String realSavePath = makePath(saveFilename, savePath);
+//                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
+//                    String path = "上传的文件的路径是：" + realSavePath + " 文件名：" + saveFilename ;
                     //创建一个文件输出流
-                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
-                    String path = "上传的文件的路径是：" + realSavePath + " 文件名：" + saveFilename ;
-                    logInfo(path);
+                    FileOutputStream out = new FileOutputStream(savePath + "\\" + saveFilename);
                     //创建一个缓冲区
                     byte buffer[] = new byte[1024];
                     //判断输入流中的数据是否已经读完的标识
