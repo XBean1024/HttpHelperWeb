@@ -110,14 +110,14 @@ public class UploadServlet extends HttpServlet {
                     //获取item中的上传文件的输入流
                     InputStream in = item.getInputStream();
                     //得到文件保存的名称
-                    String saveFilename = filename;
-//                    String saveFilename = makeFileName(filename);
+//                    String saveFilename = filename;
+                    String saveFilename = makeFileName(filename);
                     //得到文件的保存目录
-//                    String realSavePath = makePath(saveFilename, savePath);
-//                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
-//                    String path = "上传的文件的路径是：" + realSavePath + " 文件名：" + saveFilename ;
+                    String realSavePath = makePath(saveFilename, savePath);
                     //创建一个文件输出流
-                    FileOutputStream out = new FileOutputStream(savePath + "\\" + saveFilename);
+                    FileOutputStream out = new FileOutputStream(realSavePath + "\\" + saveFilename);
+                    String path = "上传的文件的路径是：" + realSavePath + " 文件名：" + saveFilename ;
+                    logInfo(path);
                     //创建一个缓冲区
                     byte buffer[] = new byte[1024];
                     //判断输入流中的数据是否已经读完的标识
