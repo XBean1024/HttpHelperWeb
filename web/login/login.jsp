@@ -18,7 +18,7 @@
 //        out.print("<script>alert(Code.INFO_PASSWORD_ERROR); </script>");
 //        return;
 //    }
-    userLoginInfo = userInfoDao.select(name, password, );
+    userLoginInfo = userInfoDao.select(name, password,"" );
     //转发
     logInfo("检查结果：" + userLoginInfo.getCode());
     if (userLoginInfo.getCode().equals(CODE_LOGIN_SUCCESS)) {
