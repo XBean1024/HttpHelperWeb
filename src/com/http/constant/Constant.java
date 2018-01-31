@@ -27,7 +27,7 @@ public class Constant {
     // 密码 1
     public static String userPasswd = "1228";
     // 数据库名
-    public static String dbName = "http_helper_web";
+    public static String dbName = "http_helper_we";
     // 联结字符串
     public static String url = "jdbc:mysql://localhost/" + dbName + "?user="
                                         + userName + "&password=" + userPasswd

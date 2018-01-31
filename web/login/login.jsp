@@ -10,14 +10,16 @@
     UserInfo userLoginInfo;
     String name = request.getParameter("name");
     String password = request.getParameter("password");
-//    if (Util.isEmpty(name)) {
-//        out.print("<script>alert(Code.INFO_ACCOUNT_ERROR); </script>");
-//        return;
-//    }
-//    if (Util.isEmpty(password)) {
-//        out.print("<script>alert(Code.INFO_PASSWORD_ERROR); </script>");
-//        return;
-//    }
+    logInfo(name);
+    logInfo(password);
+    if (Util.isEmpty(name)) {
+        out.print("<script>alert(Code.INFO_ACCOUNT_ERROR); </script>");
+        return;
+    }
+    if (Util.isEmpty(password)) {
+        out.print("<script>alert(Code.INFO_PASSWORD_ERROR); </script>");
+        return;
+    }
     userLoginInfo = userInfoDao.select(name, password,"" );
     //转发
     logInfo("检查结果：" + userLoginInfo.getCode());
