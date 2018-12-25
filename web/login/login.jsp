@@ -48,7 +48,7 @@
 
         <h2><span class="fontawesome-lock"></span>用户登录</h2>
         <!--servlet 就在项目的根目录下-->
-        <form action="./login/login.jsp" method="POST" id="login_form">
+        <form action="UserServlet" method="POST" id="login_form">
 
             <fieldset>
 

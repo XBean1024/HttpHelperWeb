@@ -5,7 +5,7 @@
          version="3.1">
 
     <welcome-file-list>
-        <welcome-file>login/login.html</welcome-file>
+        <welcome-file>login/welcome.html</welcome-file>
     </welcome-file-list>
     <!--在web.xml中完成的一个最常见的任务是对servlet或JSP页面给出名称和定制的URL。
     用servlet元素分配名称；
@@ -23,45 +23,56 @@
             <param-value>3</param-value>
         </init-param>
     </servlet>
-
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/user</url-pattern>
+    </servlet-mapping>
 
     <!--视频播放-->
     <servlet>
         <servlet-name>VideoPlayer</servlet-name>
         <servlet-class>com.http.servlet.player.Player</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>UploadServlet</servlet-name>
-        <servlet-class>com.http.servlet.upload.UploadServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.http.servlet.user.RegisterServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ModifyServlet</servlet-name>
-        <servlet-class>com.http.servlet.user.ModifyServlet</servlet-class>
-    </servlet>
-
-
-    <servlet-mapping>
-        <servlet-name>ModifyServlet</servlet-name>
-        <url-pattern>/modify</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UploadServlet</servlet-name>
-        <url-pattern>/upload</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
-    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>VideoPlayer</servlet-name>
         <url-pattern>/player/video</url-pattern>
     </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>com.http.servlet.upload.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>com.http.servlet.user.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>ModifyServlet</servlet-name>
+        <servlet-class>com.http.servlet.user.ModifyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ModifyServlet</servlet-name>
+        <url-pattern>/modify</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+
 </web-app>

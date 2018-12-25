@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 import static com.http.constant.Code.CODE_LOGIN_SUCCESS;
 import static com.http.constant.Code.COLUMN_LABEL_PASSWORD;
@@ -38,7 +39,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");//密码
         String platform = request.getParameter("platform");//平台  PC或者手机
 
-        name = new String(name.getBytes("ISO8859-1"), CHART_SET_UTF_8);//解决中文乱码
+        name = new String(name.getBytes("ISO8859-1"), StandardCharsets.UTF_8);//解决中文乱码
         logInfo("账号 ：" + name);
               /*参数取值检查*/
         if (Util.isEmpty(name)) {
@@ -59,7 +60,7 @@ public class LoginServlet extends HttpServlet {
             userInfo = userInfoDao.select(name, password, COLUMN_LABEL_PASSWORD);
             switch (platform) {
                 case PLATFORM_MOBILE_PHONE: {
-                    jsonBytes = JSON.toJSONString(userInfo).getBytes(CHART_SET_UTF_8);
+                    jsonBytes = JSON.toJSONString(userInfo).getBytes(StandardCharsets.UTF_8);
                     OutputStream outputStream = response.getOutputStream();
                     outputStream.write(jsonBytes);//输出响应数据
                     outputStream.flush();
@@ -72,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                         dispatcher.forward(request, response);
                     } else {
                         log(userInfo.getMsg());
-                        jsonBytes = JSON.toJSONString(userInfo).getBytes(CHART_SET_UTF_8);
+                        jsonBytes = JSON.toJSONString(userInfo).getBytes(StandardCharsets.UTF_8);
                         OutputStream outputStream = response.getOutputStream();
                         outputStream.write(jsonBytes);//输出响应数据
                         outputStream.flush();

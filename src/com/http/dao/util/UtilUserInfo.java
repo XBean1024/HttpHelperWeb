@@ -2,6 +2,7 @@ package com.http.dao.util;
 
 import com.http.servlet.user.bean.UserBean;
 import com.http.dao.connect.DBConnection;
+import com.http.util.Util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -93,7 +94,7 @@ public class UtilUserInfo {
             pstmt = con.prepareStatement(sql);
             resultSet = pstmt.executeQuery();
         } catch (SQLException e) {
-            e.printStackTrace();
+            Util.logInfo(e.getMessage());
         }
         return resultSet;
     }

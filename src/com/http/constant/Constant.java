@@ -25,12 +25,12 @@ public class Constant {
     // 数据库用户名
     public static String userName = "root";
     // 密码 1
-    public static String userPasswd = "1228";
+    public static String userPasswd = "liux1228";
     // 数据库名
-    public static String dbName = "http_helper_we";
+    public static String dbName = "apitest";
     // 联结字符串
     public static String url = "jdbc:mysql://localhost/" + dbName + "?user="
                                         + userName + "&password=" + userPasswd
-                                        + "&useUnicode=true&characterEncoding=utf-8";
+                                        + "&useUnicode=true&characterEncoding=utf-8&characterEncoding=utf-8&useSSL=false";
 
 }
