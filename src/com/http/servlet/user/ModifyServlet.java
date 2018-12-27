@@ -6,6 +6,7 @@ import com.http.dao.user.UserInfoDao;
 import com.http.servlet.user.bean.UserBean;
 import com.http.servlet.user.bean.UserInfo;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,11 @@ public class ModifyServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         logInfo("修改");
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

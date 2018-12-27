@@ -6,8 +6,7 @@ import com.http.dao.user.UserInfoDao;
 import com.http.servlet.user.bean.UserInfo;
 import com.http.util.Util;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
+import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,12 +20,32 @@ import static com.http.constant.Constant.*;
 import static com.http.util.Util.emptyParams;
 import static com.http.util.Util.logInfo;
 
-/**C:\HttpHelperWeb\web\video\demo.mp4
+/**
+ * C:\HttpHelperWeb\web\video\demo.mp4
  * Created by smart on 2017/8/4.
  * function： 处理用户信息的 类
  */
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+
+    private String defaultPlatfrom = "pc";
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        Util.logInfo("init");
+    }
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        defaultPlatfrom = config.getInitParameter("tag");
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        Util.logInfo("destroy");
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -41,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 
         name = new String(name.getBytes("ISO8859-1"), StandardCharsets.UTF_8);//解决中文乱码
         logInfo("账号 ：" + name);
-              /*参数取值检查*/
+        /*参数取值检查*/
         if (Util.isEmpty(name)) {
             OutputStream outputStream = response.getOutputStream();
             emptyParams(outputStream, Code.CODE_ACCOUNT_ERROR, Code.INFO_ACCOUNT_ERROR);

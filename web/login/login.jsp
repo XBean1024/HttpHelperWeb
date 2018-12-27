@@ -4,6 +4,18 @@
 <%@ page import="com.http.dao.user.UserInfoDao" %>
 <%@ page import="com.http.servlet.user.bean.UserInfo" %>
 <%@ page import="com.http.util.Util" %>
+<%@ page import="java.util.Date" %>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录jsp</title>
+    <link type="text/css" rel="stylesheet" href="./login/css/style.css">
+
+    <script type="text/javascript" src="./js/user/login.js"></script>
+</head>
+
+<body>
 
 <%
     UserInfoDao userInfoDao = new UserInfoDao();
@@ -20,7 +32,7 @@
         out.print("<script>alert(Code.INFO_PASSWORD_ERROR); </script>");
         return;
     }
-    userLoginInfo = userInfoDao.select(name, password,"" );
+    userLoginInfo = userInfoDao.select(name, password, "");
     //转发
     logInfo("检查结果：" + userLoginInfo.getCode());
     if (userLoginInfo.getCode().equals(CODE_LOGIN_SUCCESS)) {
@@ -30,18 +42,9 @@
         logInfo(userLoginInfo.getMsg());
         out.print("<script>alert(userLoginInfo.getMsg()); </script>");
     }
+    Date date = new Date();
+    out.print(date);
 %>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>登录</title>
-    <link type="text/css" rel="stylesheet" href="./login/css/style.css">
-
-    <script type="text/javascript" src="./js/user/login.js"></script>
-</head>
-
-<body>
-
 <div class="container">
 
     <div id="login">
@@ -57,7 +60,8 @@
                           style="background: cornsilk;width: 200px;height: 30px"></p>
 
                 <p><label for="password">Password</label></p>
-                <p><input type="password" id="password" name="password" placeholder="请输入密码" style="width: 200px;height: 30px"></p>
+                <p><input type="password" id="password" name="password" placeholder="请输入密码"
+                          style="width: 200px;height: 30px"></p>
 
                 <p><input type="submit" value="登录"></p>
 
