@@ -4,36 +4,65 @@
     <meta charset="UTF-8">
     <title>登录</title>
     <link type="text/css" rel="stylesheet" href="./css/welcome/style.css">
+    <script type="text/javascript" src="./js/clock.js"></script>
+
 </head>
 
 <body>
+<div id="clock" class="date">
+    <h1><img src="./images/clock/title.png" alt="时钟"/></h1>
+    <div class="year">
+        <img class="num" src="./images/clock/0.png" alt="2"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="1"/>
+        <img class="num" src="./images/clock/0.png" alt="8"/>
+        <img class="num" src="./images/clock/year.png" alt="year"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock//month.png" alt="month"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock//seven.png" alt="seven"/>
+    </div>
+    <div class="time">
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/sign.png" alt="sign"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/sign.png" alt="sign"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num2" src="./images/clock/week.png" alt="week"/>
+        <img class="num" src="./images/clock/one.png" alt="one"/>
+    </div>
 
-<div class="container">
+    <div class="container">
 
-    <div id="login">
+        <div id="login">
 
-        <h2><span class="fontawesome-lock"></span>用户登录</h2>
-        <!--servlet 就在项目的根目录下-->
-        <form action="user?platform=pc" method="POST" id="login_form">
+            <h2><span class="fontawesome-lock"></span>用户登录</h2>
+            <!--servlet 就在项目的根目录下-->
+            <form action="user?platform=pc" method="POST" id="login_form">
 
-            <fieldset>
+                <fieldset>
 
-                <p><label for="account">Account</label></p>
-                <p><input type="text" id="account" name="name" placeholder="请输入账号"
-                          style="background: cornsilk;width: 200px;height: 30px"></p>
+                    <p><label for="account">Account</label></p>
+                    <p><input type="text" id="account" name="name" placeholder="请输入账号"
+                              style="background: cornsilk;width: 200px;height: 30px"></p>
 
-                <p><label for="password">Password</label></p>
-                <p><input type="password" id="password" name="password" placeholder="请输入密码"
-                          style="width: 200px;height: 30px"></p>
+                    <p><label for="password">Password</label></p>
+                    <p><input type="password" id="password" name="password" placeholder="请输入密码"
+                              style="width: 200px;height: 30px"></p>
 
-                <p><input type="submit" value="登录"></p>
+                    <p><input type="submit" value="登录"></p>
 
-            </fieldset>
+                </fieldset>
 
-        </form>
+            </form>
 
-    </div> <!-- end login -->
+        </div> <!-- end login -->
 
-</div>
+    </div>
 </body>
 </html>

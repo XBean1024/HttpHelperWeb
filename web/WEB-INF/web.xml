@@ -5,8 +5,8 @@
          version="3.1">
 
     <welcome-file-list>
-        <!--<welcome-file>login/welcome.html</welcome-file>-->
-        <welcome-file>login/clock.html</welcome-file>
+        <welcome-file>login/welcome.html</welcome-file>
+        <!--<welcome-file>login/clock.html</welcome-file>-->
         <!--<welcome-file>login/login.jsp</welcome-file>-->
     </welcome-file-list>
     <!--在web.xml中完成的一个最常见的任务是对servlet或JSP页面给出名称和定制的URL。
