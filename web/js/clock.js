@@ -1,15 +1,21 @@
 let imgArray = [];//用于存放需要改变的img标签
+let twinkleArray = [];//时间分割符闪烁
 window.onload = function () {
     //获取时钟所在div容器
     const oClock = document.getElementById('clock');
     //获取时钟所有img标签
     const oImg = oClock.getElementsByTagName('img');
     let lenOImg = oImg.length;
-
+    // alert(lenOImg)
     for (let i = 0; i < lenOImg; i++) {
-        if (i === 0 || i === 5 || i === 8 || i === 11 || i === 14 || i === 17 || i === 20) {//时钟标题及年月日、星期不变等文字不变
+        if (i === 0 || i === 5 || i === 8 || i === 11 || i === 20) {//时钟标题及年月日、星期不变等文字不变
             continue;
         }
+        if (i === 14 || i === 17) {
+            twinkleArray.push(oImg[i]);//两个冒号
+            continue;
+        }
+
         // oImg[i].src = "./images/clock/0.png";
 
         imgArray.push(oImg[i]);
@@ -23,6 +29,22 @@ window.onload = function () {
  * 动态更新时间
  */
 function updateDate() {
+    // alert(twinkleArray[0].style.display);
+    /*
+    * 冒号分割
+    * display:none;不占位隐藏
+    * visibility:hidden;占位隐藏
+    * */
+    if (twinkleArray[0].style.visibility === "hidden") {
+        twinkleArray[0].style.visibility = ''
+    } else {
+        twinkleArray[0].style.visibility = 'hidden'
+    }
+    if (twinkleArray[1].style.visibility === 'hidden') {
+        twinkleArray[1].style.visibility = ''
+    } else {
+        twinkleArray[1].style.visibility = 'hidden'
+    }
     //获取当期日期及时间
     let imgArrayLen = imgArray.length;
     // alert(imgArrayLen);
@@ -78,7 +100,7 @@ function updateDate() {
     if (hLen === 1) {//0-8(1-9)
         imgArray[yLen + mLen + dLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
         let h1 = parseInt(h.charAt(0));
-        if ( h1 > 0) {
+        if (h1 > 0) {
             imgArray[yLen + mLen + dLen + 1].src = "./images/clock/" + h1 + ".png";//设置月份中的第 2个 显示 d0
         } else {
             //00点
