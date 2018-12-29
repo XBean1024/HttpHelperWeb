@@ -21,7 +21,7 @@ window.onload = function () {
         imgArray.push(oImg[i]);
 
     }
-    setInterval(updateDate, 1000);
+    setInterval(updateDate, 500);
 
 };
 
@@ -46,7 +46,7 @@ function updateDate() {
         twinkleArray[1].style.visibility = 'hidden'
     }
     //获取当期日期及时间
-    let imgArrayLen = imgArray.length;
+    let imgArrayLen = imgArray.length;//15
     // alert(imgArrayLen);
     // for (let i = 0; i < imgArrayLen; i++) {
     //     alert(imgArray[i].src);
@@ -55,26 +55,30 @@ function updateDate() {
     // alert(oDate.getUTCFullYear());
 
     //处理年
-    const y = String(oDate.getFullYear());//2018年份
+    const y = String(oDate.getFullYear());//4
 
     const yLen = y.length;//年份长度 4
+    let yStartPos = 0;//[=0,4)
     for (let i = 0; i < yLen; i++) {
-        imgArray[i].src = "./images/clock/" + y.charAt(i) + ".png";//设置年份中的第 i个
+        imgArray[yStartPos + i].src = "./images/clock/" + y.charAt(i) + ".png";//设置年份中的第 i个
     }
+
+
     //处理月
-    const m = String(oDate.getMonth());//月份-1
+    const m = String(oDate.getMonth());//2
     const mLen = m.length;//月份长度 2
+    let mStartPos = yStartPos + yLen;//[=4,6)
     // alert(mLen);
     if (mLen === 1) {//0~9
         let m0 = parseInt(m.charAt(0));
         if (m0 <= 8) {
             //0~8月(即1~9)
-            imgArray[yLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
-            imgArray[yLen + 1].src = "./images/clock/" + (m0 + 1) + ".png";//设置月份中的第 2个 显示 m+1
+            imgArray[mStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
+            imgArray[mStartPos + 1].src = "./images/clock/" + (m0 + 1) + ".png";//设置月份中的第 2个 显示 m+1
         } else {
             //10月
-            imgArray[yLen].src = "./images/clock/1.png";//设置月份第一个img显示 1
-            imgArray[yLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
+            imgArray[mStartPos].src = "./images/clock/1.png";//设置月份第一个img显示 1
+            imgArray[mStartPos + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
         }
     } else {
         let m1 = parseInt(m.charAt(1));
@@ -83,90 +87,110 @@ function updateDate() {
     }
 
     //处理日
-    const d = String(oDate.getDate());//几号
+    const d = String(oDate.getDate());//2
     const dLen = d.length;//日长
+    let dStartPos = mStartPos + mLen;//[=6,8)
     if (dLen === 1) {//1-9
         let d0 = parseInt(d.charAt(0));
-        imgArray[yLen + mLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
-        imgArray[yLen + mLen + 1].src = "./images/clock/" + d0 + ".png";//设置月份中的第 2个 显示 d0
+        imgArray[dStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
+        imgArray[dStartPos + 1].src = "./images/clock/" + d0 + ".png";//设置月份中的第 2个 显示 d0
     } else {//10-12
-        imgArray[yLen + mLen].src = "./images/clock/" + d.charAt(0) + ".png";//设置月份第一个img显示 0
-        imgArray[yLen + mLen + 1].src = "./images/clock/" + d.charAt(1) + ".png";//设置月份第一个img显示 0
+        imgArray[dStartPos].src = "./images/clock/" + d.charAt(0) + ".png";//设置月份第一个img显示 0
+        imgArray[dStartPos + 1].src = "./images/clock/" + d.charAt(1) + ".png";//设置月份第一个img显示 0
     }
     //处理时
     const h = String(oDate.getHours());
     // alert(h);
-    const hLen = h.length;
+    const hLen = h.length;//2
+    let hStartPos = dStartPos + dLen;//[=8,10)
+    if (dLen === 1) {
+        hStartPos = hStartPos + 1;
+    }
     if (hLen === 1) {//0-8(1-9)
-        imgArray[yLen + mLen + dLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
+        imgArray[hStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
         let h1 = parseInt(h.charAt(0));
         if (h1 > 0) {
-            imgArray[yLen + mLen + dLen + 1].src = "./images/clock/" + h1 + ".png";//设置月份中的第 2个 显示 d0
+            imgArray[hStartPos + 1].src = "./images/clock/" + h1 + ".png";//设置月份中的第 2个 显示 d0
         } else {
             //00点
-            imgArray[yLen + mLen + dLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
+            imgArray[hStartPos + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
         }
     } else {//10-12
-        imgArray[yLen + mLen + dLen].src = "./images/clock/" + h.charAt(0) + ".png";//设置月份第一个img显示 0
-        imgArray[yLen + mLen + dLen + 1].src = "./images/clock/" + h.charAt(1) + ".png";//设置月份第一个img显示 0
+        imgArray[hStartPos].src = "./images/clock/" + h.charAt(0) + ".png";//设置月份第一个img显示 0
+        imgArray[hStartPos + 1].src = "./images/clock/" + h.charAt(1) + ".png";//设置月份第一个img显示 0
     }
     //处理分
     const mf = String(oDate.getMinutes());
-    // alert(mf);
-    const mfLen = mf.length;
+
+    const mfLen = mf.length;//2
+    let mfStartPos = hStartPos + hLen;//[=10,12)
+    if (hLen === 1) {
+        mfStartPos = mfStartPos + 1;
+    }
     if (mfLen === 1) {//0-8(1-9)
-        imgArray[yLen + mLen + hLen + dLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
+        imgArray[mfStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
         let mf1 = parseInt(mf.charAt(0));
+        // alert(mf1);
         if (mf1 > 0) {
-            imgArray[yLen + mLen + dLen + hLen + 1].src = "./images/clock/" + mf1 + ".png";//设置月份中的第 2个 显示 d0
+            imgArray[mfStartPos + 1].src = "./images/clock/" + mf1 + ".png";//设置月份中的第 2个 显示 d0
         } else {
             //00点
-            imgArray[yLen + mLen + dLen + hLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
+            imgArray[mfStartPos + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
         }
     } else {//10-12
-        imgArray[yLen + mLen + dLen + hLen].src = "./images/clock/" + mf.charAt(0) + ".png";//设置月份第一个img显示 0
-        imgArray[yLen + mLen + dLen + hLen + 1].src = "./images/clock/" + mf.charAt(1) + ".png";//设置月份第一个img显示 0
+        imgArray[mfStartPos].src = "./images/clock/" + mf.charAt(0) + ".png";//设置月份第一个img显示 0
+        imgArray[mfStartPos + 1].src = "./images/clock/" + mf.charAt(1) + ".png";//设置月份第一个img显示 0
     }
     //处理秒
     const s = String(oDate.getSeconds());
     // alert(s);
     const sLen = s.length;
+    let sStartPos = mfStartPos + mfLen;//[=12,14)
+    if (mfLen === 1) {
+        sStartPos = sStartPos + 1;
+    }
     if (sLen === 1) {//0-8(1-9)
-        imgArray[yLen + mLen + dLen + hLen + mfLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
+        imgArray[sStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
         let s1 = parseInt(s.charAt(0));
-        if (s1 > 0) {
-            imgArray[yLen + mLen + dLen + hLen + mfLen + 1].src = "./images/clock/" + s1 + ".png";//设置月份中的第 2个 显示 d0
-        } else {
+
+        if (s1 === 0) {
             //00点
-            imgArray[yLen + mLen + hLen + dLen + mfLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
+            // alert(s1);
+            imgArray[sStartPos + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
+        } else {
+            imgArray[sStartPos + 1].src = "./images/clock/" + s.charAt(0) + ".png";//设置月份中的第 2个 显示 d0
         }
     } else {//10-59
-        imgArray[yLen + mLen + dLen + hLen + mfLen].src = "./images/clock/" + s.charAt(0) + ".png";//设置月份第一个img显示 0
-        imgArray[yLen + mLen + dLen + hLen + mfLen + 1].src = "./images/clock/" + s.charAt(1) + ".png";//设置月份第一个img显示 0
+        imgArray[sStartPos].src = "./images/clock/" + s.charAt(0) + ".png";//设置月份第一个img显示 0
+        imgArray[sStartPos + 1].src = "./images/clock/" + s.charAt(1) + ".png";//设置月份第一个img显示 0
     }
     //处理周
     const w = oDate.getDay();//星期
+    let wStartPos = sStartPos + sLen;//[=14]
+    if (sLen === 1) {
+        wStartPos = wStartPos + 1;
+    }
     switch (w) {
         case 1:
-            imgArray[imgArrayLen - 1].src = "./images/clock/one.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/one.png";//设置月份第一个img显示 0
             break;
         case 2:
-            imgArray[imgArrayLen - 1].src = "./images/clock/two.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/two.png";//设置月份第一个img显示 0
             break;
         case 3:
-            imgArray[imgArrayLen - 1].src = "./images/clock/three.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/three.png";//设置月份第一个img显示 0
             break;
         case 4:
-            imgArray[imgArrayLen - 1].src = "./images/clock/four.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/four.png";//设置月份第一个img显示 0
             break;
         case 5:
-            imgArray[imgArrayLen - 1].src = "./images/clock/five.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/five.png";//设置月份第一个img显示 0
             break;
         case 6:
-            imgArray[imgArrayLen - 1].src = "./images/clock/six.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/six.png";//设置月份第一个img显示 0
             break;
         case 7:
-            imgArray[imgArrayLen - 1].src = "./images/clock/seven.png";//设置月份第一个img显示 0
+            imgArray[wStartPos].src = "./images/clock/seven.png";//设置月份第一个img显示 0
             break;
     }
 
