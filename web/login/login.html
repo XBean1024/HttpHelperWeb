@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>126记住密码</title>
+    <style type="text/css">
+        a:hover {
+            background: aqua;
+        }
+    </style>
+    <!--js也是读一行，执行一行-->
+    <script type="text/javascript">
+        window.onload = function () {
+            setInterval(showTime, 1);
+        };
+
+        function showTime() {
+            const oDate = new Date();
+            const txt = document.getElementById('show_time');
+            txt.innerHTML = oDate.getHours() + ":" + oDate.getMinutes() + ":" + oDate.getSeconds();
+        }
+    </script>
+</head>
+<body>
+<p id="show_time">
+</body>
+</html>

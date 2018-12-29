@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="static com.http.util.Util.logInfo" %>
 <%@ page import="static com.http.constant.Code.CODE_LOGIN_SUCCESS" %>
 <%@ page import="com.http.dao.user.UserInfoDao" %>
