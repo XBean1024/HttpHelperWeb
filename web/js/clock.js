@@ -77,9 +77,9 @@ function updateDate() {
     const hLen = h.length;
     if (hLen === 1) {//0-8(1-9)
         imgArray[yLen + mLen + dLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
-        let h0 = parseInt(h.charAt(0));
-        if (h0 > 0) {
-            imgArray[yLen + mLen + dLen + 1].src = "./images/clock/" + h0 + ".png";//设置月份中的第 2个 显示 d0
+        let h1 = parseInt(h.charAt(0));
+        if ( h1 > 0) {
+            imgArray[yLen + mLen + dLen + 1].src = "./images/clock/" + h1 + ".png";//设置月份中的第 2个 显示 d0
         } else {
             //00点
             imgArray[yLen + mLen + dLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
@@ -94,9 +94,9 @@ function updateDate() {
     const mfLen = mf.length;
     if (mfLen === 1) {//0-8(1-9)
         imgArray[yLen + mLen + hLen + dLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
-        let mf0 = parseInt(h.charAt(0));
-        if (mf0 > 0) {
-            imgArray[yLen + mLen + dLen + hLen + 1].src = "./images/clock/" + h0 + ".png";//设置月份中的第 2个 显示 d0
+        let mf1 = parseInt(mf.charAt(0));
+        if (mf1 > 0) {
+            imgArray[yLen + mLen + dLen + hLen + 1].src = "./images/clock/" + mf1 + ".png";//设置月份中的第 2个 显示 d0
         } else {
             //00点
             imgArray[yLen + mLen + dLen + hLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
@@ -111,9 +111,9 @@ function updateDate() {
     const sLen = s.length;
     if (sLen === 1) {//0-8(1-9)
         imgArray[yLen + mLen + dLen + hLen + mfLen].src = "./images/clock/0.png";//设置月份第一个img显示 0
-        let mf0 = parseInt(h.charAt(0));
-        if (mf0 > 0) {
-            imgArray[yLen + mLen + dLen + hLen + mfLen + 1].src = "./images/clock/" + s.charAt(0) + ".png";//设置月份中的第 2个 显示 d0
+        let s1 = parseInt(s.charAt(0));
+        if (s1 > 0) {
+            imgArray[yLen + mLen + dLen + hLen + mfLen + 1].src = "./images/clock/" + s1 + ".png";//设置月份中的第 2个 显示 d0
         } else {
             //00点
             imgArray[yLen + mLen + hLen + dLen + mfLen + 1].src = "./images/clock/0.png";//设置月份中的第 2个显示 0
