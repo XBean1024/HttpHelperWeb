@@ -69,8 +69,10 @@ function updateDate() {
     const mLen = m.length;//月份长度 2
     let mStartPos = yStartPos + yLen;//[=4,6)
     // alert(mLen);
+    // alert(mStartPos);
     if (mLen === 1) {//0~9
         let m0 = parseInt(m.charAt(0));
+        let index = m0 + 1;
         if (m0 <= 8) {
             //0~8月(即1~9)
             imgArray[mStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
@@ -85,11 +87,15 @@ function updateDate() {
         imgArray[yLen].src = "./images/clock/1.png";//设置月份中的第 i个
         imgArray[yLen + 1].src = "./images/clock/" + (m1 + 1) + ".png";
     }
+    // alert(imgArray[mStartPos + 1].src);
 
     //处理日
     const d = String(oDate.getDate());//2
     const dLen = d.length;//日长
     let dStartPos = mStartPos + mLen;//[=6,8)
+    if (mLen === 1) {
+        dStartPos = dStartPos + 1;
+    }
     if (dLen === 1) {//1-9
         let d0 = parseInt(d.charAt(0));
         imgArray[dStartPos].src = "./images/clock/0.png";//设置月份第一个img显示 0
