@@ -1,0 +1,117 @@
+body {
+    /*background-image: url("../../images/background/background.jpg");*/
+    margin: 0;
+    background-color: indigo;
+}
+
+/*clock*/
+
+img {
+    border: none;
+}
+
+.date {
+    width: 320px;
+    height: 180px;
+    background: url(../../images/background/bg.png);
+    margin: 50px auto 0;
+    position: relative;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.date h1 {
+    text-align: center;
+    padding: 15px 0 10px;
+    color: white;
+}
+
+.date h1 img {
+    display: none;
+}
+
+.year {
+    text-align: center;
+    padding-top: 15px;
+}
+
+.time {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.url {
+    text-align: center;
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+}
+
+.date img {
+    position: relative;
+}
+
+.pos2 {
+    margin-left: 10px;
+}
+
+.num {
+    width: 20px;
+}
+
+.week_letter {
+    width: 20px;
+}
+
+/*clock----over*/
+
+/* ---------- login ---------- */
+
+.user_form {
+    width: 400px;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    background-color: red;
+    border-radius: 20px 20px 20px 20px;
+}
+
+.user_form h2 {
+    color: #fff;
+    width: 100%;
+    font-size: 28px;
+    text-align: center;
+}
+
+#login {
+    background-color: white;
+    width: 360px;
+    height: fit-content;
+    padding: 20px 20px 20px 20px;
+    border-radius: 0 0 20px 20px;
+}
+
+input {
+    border: none;
+    font: 100%/1.5em "Varela Round", sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+
+}
+
+p input:only-child {
+    background: cornsilk none;
+    width: 200px;
+    height: 30px;
+    border-radius: 13px;
+}
+
+p input[type="button"] {
+    background: cornflowerblue;
+    color: white;
+    border-radius: 5px;
+    width: 100px;
+}
