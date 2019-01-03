@@ -5,9 +5,9 @@
          version="3.1">
 
     <welcome-file-list>
-        <welcome-file>login/welcome.html</welcome-file>
-        <!--<welcome-file>login/clock.html</welcome-file>-->
-        <!--<welcome-file>login/login.jsp</welcome-file>-->
+        <welcome-file>html/user.html</welcome-file>
+        <!--<user-file>login/clock.html</user-file>-->
+        <!--<user-file>login/login.jsp</user-file>-->
     </welcome-file-list>
     <!--在web.xml中完成的一个最常见的任务是对servlet或JSP页面给出名称和定制的URL。
     用servlet元素分配名称；
@@ -27,7 +27,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
-        <url-pattern>/user</url-pattern>
+        <url-pattern>/login</url-pattern>
         <!--'/user'中的'/'代表着web应用的根目录-->
     </servlet-mapping>
 

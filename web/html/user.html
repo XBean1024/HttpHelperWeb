@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录/注册</title>
+    <link type="text/css" rel="stylesheet" href="./css/user.css">
+    <script type="text/javascript" src="./js/clock.js"></script>
+    <script type="text/javascript" src="./js/user.js"></script>
+
+</head>
+
+<body>
+<div id="clock" class="date">
+    <h1><img src="./images/clock/title.png" alt="时钟"/></h1>
+    <div class="year">
+        <img class="num" src="./images/clock/0.png" alt="2"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="1"/>
+        <img class="num" src="./images/clock/0.png" alt="8"/>
+        <img class="num" src="./images/clock/year.png" alt="year"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock//month.png" alt="month"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock//seven.png" alt="seven"/>
+    </div>
+    <div class="time">
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/sign.png" alt="sign"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/sign.png" alt="sign"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="num" src="./images/clock/0.png" alt="0"/>
+        <img class="week_letter" src="./images/clock/week.png" alt="week"/>
+        <img class="week_letter" src="./images/clock/one.png" alt="one"/>
+    </div>
+</div>
+<form action="" name="home_login" method="POST" class="user_form">
+    <h2>用户登录</h2>
+    <div class="user">
+        <div id="login_div" style="display: block">
+            <p><label for="account">Account</label></p>
+            <p><input type="text" id="account" name="name" placeholder="请输入账号"></p>
+
+            <p><label for="password">Password</label></p>
+            <p><input type="password" id="password" name="password" placeholder="请输入密码"></p>
+
+        </div>
+
+        <p>
+            <input class="form-submit" type="button" value="登录" onclick="login()"/>
+            <input class="form-submit" type="button" value="注册" style="float: right" onclick="register()"/>
+        </p>
+    </div>
+
+</form>
+<form  action="" name="home_register" method="POST" class="user_form" style="display: none">
+    <h2>用户注册</h2>
+    <div class="user">
+        <p><label for="account">Account</label></p>
+        <p><input type="text" id="account_register" name="name" placeholder="请输入账号"></p>
+
+        <p><label for="password">Password</label></p>
+        <p><input type="password" id="password_register" name="password" placeholder="请输入密码"></p>
+
+        <p>
+            <input class="form-submit" type="button" value="登录" onclick="login()"/>
+            <input class="form-submit" type="button" value="注册" style="float: right"
+                   onclick="register()"/>
+        </p>
+    </div>
+
+</form>
+</body>
+</html>
