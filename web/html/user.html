@@ -43,32 +43,34 @@
     <div class="user">
         <div id="login_div" style="display: block">
             <p><label for="account">Account</label></p>
-            <p><input type="text" id="account" name="name" placeholder="请输入账号"></p>
+            <p><input type="text" id="account" style="width: 360px" name="name" placeholder="请输入账号"></p>
 
             <p><label for="password">Password</label></p>
-            <p><input type="password" id="password" name="password" placeholder="请输入密码"></p>
+            <p><input type="password" id="password" style="width: 360px" name="password" placeholder="请输入密码"></p>
 
         </div>
 
         <p>
-            <input class="form-submit" type="button" value="登录" onclick="login()"/>
-            <input class="form-submit" type="button" value="注册" style="float: right" onclick="register()"/>
+            <input class="form-submit" type="button" value="登录" style="width: 60px;height: 30px" onclick="login()"/>
+            <input class="form-submit" type="button" value="去注册?" style="float: right;width: 70px;height: 30px"
+                   onclick="to_register()"/>
         </p>
     </div>
 
 </form>
-<form  action="" name="home_register" method="POST" class="user_form" style="display: none">
+<form action="" name="home_register" method="POST" class="user_form" style="display: none">
     <h2>用户注册</h2>
     <div class="user">
-        <p><label for="account">Account</label></p>
-        <p><input type="text" id="account_register" name="name" placeholder="请输入账号"></p>
+        <p><label for="account_register">Account</label></p>
+        <p><input type="text" id="account_register" style="width: 360px" name="name" placeholder="请输入账号"></p>
 
-        <p><label for="password">Password</label></p>
-        <p><input type="password" id="password_register" name="password" placeholder="请输入密码"></p>
+        <p><label for="password_register">Password</label></p>
+        <p><input type="password" id="password_register" style="width: 360px" name="password" placeholder="请输入密码"></p>
+        <p><input type="password" id="password_register2" style="width: 360px" name="password" placeholder="请再次输入密码"></p>
 
         <p>
-            <input class="form-submit" type="button" value="登录" onclick="login()"/>
-            <input class="form-submit" type="button" value="注册" style="float: right"
+            <input class="form-submit" type="button" value="去登录?" style="width: 70px;height: 30px" onclick="login()"/>
+            <input class="form-submit" type="button" value="注册" style="float: right;width: 60px;height: 30px"
                    onclick="register()"/>
         </p>
     </div>
